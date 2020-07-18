@@ -51,9 +51,9 @@ include 'config.php';
 										Register or Login
 									  </button>
 									  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-										<a class="dropdown-item" href="login_student.php">Student</a>
-										<a class="dropdown-item" href="login_employer.php">Employer</a>
-										<a class="dropdown-item" href="login_educator.php">Educator</a>
+										<a class="dropdown-item" href="login_student.html">Student</a>
+										<a class="dropdown-item" href="login_employer.html">Employer</a>
+										<a class="dropdown-item" href="login_educator.html">Educator</a>
 									  </div>
 									</div>
 								</div>
@@ -81,21 +81,21 @@ include 'config.php';
 							<nav class="main_nav_contaner ml-auto">
 								<ul class="main_nav">
 									<li class="active"><a href="#">Home</a></li>
-									<li><a href="our_mission.php">Our mission</a></li>
-									<li><a href="internships.php">Internships</a></li>
+									<li><a href="our_mission.html">Our mission</a></li>
+									<li><a href="internships.html">Internships</a></li>
 									<li><a href="<?php
 									if($_SESSION['profile_type'] == 1){
-										echo "profile_panels/student_profile_panel/index_student.php";
+										echo "profile_panels/student_profile_panel/index_student.html";
 										}else if ($_SESSION['profile_type'] == 2){
-										echo "profile_panels/employer_profile_panel/index_employer.php";
+										echo "profile_panels/employer_profile_panel/index_employer.html";
 									}else if ($_SESSION['profile_type'] == 3){
-										echo "profile_panels/educator_profile_panel/index_educator.php";
+										echo "profile_panels/educator_profile_panel/index_educator.html";
 									}else{
 										echo "#";
 									}
 									?>">My Profile</a></li>
-									<li><a href="blog.php">Blog</a></li>
-									<li><a href="contact.php">Contacts</a></li>
+									<li><a href="blog.html">Blog</a></li>
+									<li><a href="contact.html">Contacts</a></li>
 								</ul>
 								<div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>
 
