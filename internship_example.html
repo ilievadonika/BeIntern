@@ -1,7 +1,11 @@
+<?php
+session_start();
+include 'config.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Course Details</title>
+<title>BeIntern - Internships Example</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Unicat project">
@@ -9,6 +13,7 @@
 <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
 <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link href="plugins/colorbox/colorbox.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="images/beintern_final_logo.png"> 
 <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
 <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
 <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
@@ -32,17 +37,26 @@
 							<div class="top_bar_content d-flex flex-row align-items-center justify-content-start">
 								<ul class="top_bar_contact_list">
 									<li><div class="question">Have any questions?</div></li>
-									<li>
 										<i class="fa fa-phone" aria-hidden="true"></i>
-										<div>001-1234-88888</div>
+									<li>
+										<div>+359 87 711 6695</div>
 									</li>
 									<li>
 										<i class="fa fa-envelope-o" aria-hidden="true"></i>
-										<div>info.deercreative@gmail.com</div>
+										<div>beintern@gmail.com</div>
 									</li>
 								</ul>
 								<div class="top_bar_login ml-auto">
-									<div class="login_button"><a href="#">Register or Login</a></div>
+								<div class="dropdown">
+									  <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										Register or Login
+									  </button>
+									  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+										<a class="dropdown-item" href="login_student.php">Student</a>
+										<a class="dropdown-item" href="login_employer.php">Employer</a>
+										<a class="dropdown-item" href="login_educator.php">Educator</a>
+									  </div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -59,23 +73,36 @@
 						<div class="header_content d-flex flex-row align-items-center justify-content-start">
 							<div class="logo_container">
 								<a href="#">
-									<div class="logo_text">Unic<span>at</span></div>
+							
+									<div class="logo_text">Be<span>Intern</span></div>
+									<img src="images/beintern_final_logo.png" alt="logo" width="90" height="85";
 								</a>
+									
 							</div>
 							<nav class="main_nav_contaner ml-auto">
 								<ul class="main_nav">
-									<li><a href="index.html">Home</a></li>
-									<li><a href="about.html">About</a></li>
-									<li><a href="courses.html">Courses</a></li>
-									<li><a href="blog.html">Blog</a></li>
-									<li><a href="#">Page</a></li>
-									<li><a href="contact.html">Contact</a></li>
+									<li><a href="index.php">Home</a></li>
+									<li><a href="our_mission.php">Our mission</a></li>
+									<li class="active"><a href="internships.php">Internships</a></li>
+									<li><a href="<?php
+									if($_SESSION['profile_type'] == 1){
+										echo "profile_panels/student_profile_panel/index_student.php";
+										}else if ($_SESSION['profile_type'] == 2){
+										echo "profile_panels/employer_profile_panel/index_employer.php";
+									}else if ($_SESSION['profile_type'] == 3){
+										echo "profile_panels/educator_profile_panel/index_educator.php";
+									}else{
+										echo "#";
+									}
+									?>">My Profile</a></li>
+									<li><a href="blog.php">Blog</a></li>
+									<li><a href="contact.php">Contacts</a></li>
 								</ul>
 								<div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>
 
 								<!-- Hamburger -->
 
-								<div class="shopping_cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div>
+								
 								<div class="hamburger menu_mm">
 									<i class="fa fa-bars menu_mm" aria-hidden="true"></i>
 								</div>
@@ -120,12 +147,12 @@
 		</div>
 		<nav class="menu_nav">
 			<ul class="menu_mm">
-				<li class="menu_mm"><a href="index.html">Home</a></li>
-				<li class="menu_mm"><a href="#">About</a></li>
-				<li class="menu_mm"><a href="#">Courses</a></li>
-				<li class="menu_mm"><a href="#">Blog</a></li>
-				<li class="menu_mm"><a href="#">Page</a></li>
-				<li class="menu_mm"><a href="contact.html">Contact</a></li>
+				<li class="menu_mm"><a href="index.php">Home</a></li>
+				<li class="menu_mm"><a href="our_mission.php">Our mission</a></li>
+				<li class="menu_mm"><a href="internships.php">Internships</a></li>
+				<li class="menu_mm"><a href="#">My Profile</a></li>
+				<li class="menu_mm"><a href="blog.php">Blog</a></li>
+				<li class="menu_mm"><a href="contact.php">Contacts</a></li>
 			</ul>
 		</nav>
 	</div>
@@ -139,9 +166,9 @@
 					<div class="col">
 						<div class="breadcrumbs">
 							<ul>
-								<li><a href="index.html">Home</a></li>
-								<li><a href="courses.html">Courses</a></li>
-								<li>Course Details</li>
+								<li><a href="index.php">Home</a></li>
+								<li><a href="courses.php">Internships</a></li>
+								<li>Java</li>
 							</ul>
 						</div>
 					</div>
@@ -160,13 +187,13 @@
 				<div class="col-lg-8">
 					
 					<div class="course_container">
-						<div class="course_title">Software Training</div>
+						<div class="course_title">Java Developer</div>
 						<div class="course_info d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
 
 							<!-- Course Info Item -->
 							<div class="course_info_item">
-								<div class="course_info_title">Teacher:</div>
-								<div class="course_info_text"><a href="#">Jacke Masito</a></div>
+								<div class="course_info_title">Employer:</div>
+								<div class="course_info_text"><a href="#">Natek</a></div>
 							</div>
 
 							<!-- Course Info Item -->
@@ -178,43 +205,49 @@
 							<!-- Course Info Item -->
 							<div class="course_info_item">
 								<div class="course_info_title">Categories:</div>
-								<div class="course_info_text"><a href="#">Languages</a></div>
+								<div class="course_info_text"><a href="#">IT & Software</a></div>
 							</div>
 
 						</div>
 
 						<!-- Course Image -->
-						<div class="course_image"><img src="images/course_image.jpg" alt=""></div>
+						<div class="course_image"><img src="images/java_icon.jpg" alt=""></div>
 
 						<!-- Course Tabs -->
 						<div class="course_tabs_container">
 							<div class="tabs d-flex flex-row align-items-center justify-content-start">
 								<div class="tab active">description</div>
-								<div class="tab">curriculum</div>
 								<div class="tab">reviews</div>
 							</div>
 							<div class="tab_panels">
 
 								<!-- Description -->
 								<div class="tab_panel active">
-									<div class="tab_panel_title">Software Training</div>
+									<div class="tab_panel_title">Java Developer</div>
 									<div class="tab_panel_content">
 										<div class="tab_panel_text">
-											<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosquad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit. Sed ut imperdiet nisi. Proin condimentum fermentum nunc. Lorem Ipsn gravida nibh vel velit auctor aliquet. Class aptent taciti sociosquad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+											<p>We are looking for Java Developers. You would be a part of a strong development team that strives 
+											for team achievements and team goals. The team is responsible for building systems and first-class 
+											application services within a financial market.</p>
 										</div>
 										<div class="tab_panel_section">
-											<div class="tab_panel_subtitle">Requirements</div>
+											<div class="tab_panel_subtitle">Benefits</div>
 											<ul class="tab_panel_bullets">
-												<li>Lorem Ipsn gravida nibh vel velit auctor aliquet. Class aptent taciti sociosquad litora torquent.</li>
-												<li>Cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a.</li>
-												<li>Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat.</li>
-												<li>Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio.</li>
+											<li>Private life insurance,</li>
+											<li>Private medical healthcare</li>
+											<li>Annual bonus for B2B contractors</li>
+											<li>Relocation Bonus</li>
+											<li>Access to MyBenefit platform / Multisport</li>
+											<li>Access to e-learning platform</li>
+											<li>ITIL certification</li>
+
 											</ul>
 										</div>
 										<div class="tab_panel_section">
-											<div class="tab_panel_subtitle">What is the target audience?</div>
+											<div class="tab_panel_subtitle">What is the project?</div>
 											<div class="tab_panel_text">
-												<p>This course is intended for anyone interested in learning to master his or her own body.This course is aimed at beginners, so no previous experience with hand balancing skillts is necessary Aenean viverra tincidunt nibh, in imperdiet nunc. Suspendisse eu ante pretium, consectetur leo at, congue quam. Nullam hendrerit porta ante vitae tristique. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p>
+												<p> Project supports a message-oriented service bus that is a stateless and event driven application, which transports 
+												all types of messages related to financial transactions between diverse IT systems in a safe, efficient and traceable way.</p>
 											</div>
 										</div>
 										<div class="tab_panel_faq">
@@ -226,37 +259,48 @@
 												<div class="elements_accordions">
 
 													<div class="accordion_container">
-														<div class="accordion d-flex flex-row align-items-center"><div>Can I just enroll in a single course?</div></div>
+														<div class="accordion d-flex flex-row align-items-center"><div>How to answer common internship interview questions?</div></div>
 														<div class="accordion_panel">
 															<p>Lorem ipsun gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a.</p>
 														</div>
 													</div>
 
 													<div class="accordion_container">
-														<div class="accordion d-flex flex-row align-items-center active"><div>I'm not interested in the entire Specialization?</div></div>
+														<div class="accordion d-flex flex-row align-items-center"><div>What are the benefits of an internship?</div></div>
 														<div class="accordion_panel">
-															<p>Lorem ipsun gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a.</p>
+															<p>An internship gives you the opportunity to:
+
+																	Gain valuable work experience before you graduate;
+																	Develop new skills and refine others;
+																	Apply knowledge gained from coursework to on-the-job situations;
+																	Reality-test tentative career choices;
+																	Meet and work with professionals, establishing contacts for letters of reference and networking;
+																	Experience new work environments;
+																	Earn money for tuition and expenses.</p>
 														</div>
 													</div>
 
 													<div class="accordion_container">
-														<div class="accordion d-flex flex-row align-items-center"><div>What is the refund policy?</div></div>
+														<div class="accordion d-flex flex-row align-items-center"><div>When should I start looking for a summer position?</div></div>
 														<div class="accordion_panel">
-															<p>Lorem ipsun gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a.</p>
+															<p>Begin searching in the preceding fall semester in order to take full advantage of all the resources and listings available to you. Some deadlines are very early! Beginning early allows you to more evenly balance the time required to conduct a successful summer job search with other demands on your time.
+															Being better informed will help you make better use of academic breaks to investigate summer job possibilities.</p>
 														</div>
 													</div>
 
 													<div class="accordion_container">
-														<div class="accordion d-flex flex-row align-items-center"><div>What background knowledge is necessary?</div></div>
+														<div class="accordion d-flex flex-row align-items-center active"><div>What salary can I expect?</div></div>
 														<div class="accordion_panel">
-															<p>Lorem ipsun gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a.</p>
+															<p>Salaries vary according to experience and skills required, year in school, type of position, type of employer, and location. For student jobs here in the San Francisco Bay Area, it is not unusual to find positions of $13/hour and up (substantially higher for special skills and significant experience). 
+															Internships can be both paid and unpaid depending on the same factors mentioned above.</p>
 														</div>
 													</div>
 
 													<div class="accordion_container">
-														<div class="accordion d-flex flex-row align-items-center"><div>Do i need to take the courses in a specific order?</div></div>
+														<div class="accordion d-flex flex-row align-items-center"><div>How many hours can I work as a student?</div></div>
 														<div class="accordion_panel">
-															<p>Lorem ipsun gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a.</p>
+															<p>If possible, wait to commit to a job until you have a feeling for how much time you have beyond coursework, extracurricular activities, and some time for yourself. And note that our office receives job listings year-round and also receives short-term, project positions which do not require a long-term commitment. 
+															When classes are in session, students are advised to work no more than 20 hours/week.</p>
 														</div>
 													</div>
 
@@ -268,16 +312,16 @@
 								</div>
 
 								<!-- Curriculum -->
-								<div class="tab_panel tab_panel_2">
+								<!--div class="tab_panel tab_panel_2">
 									<div class="tab_panel_content">
 										<div class="tab_panel_title">Software Training</div>
 										<div class="tab_panel_content">
 											<div class="tab_panel_text">
 												<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio.</p>
-											</div>
+											</div>-->
 
 											<!-- Dropdowns -->
-											<ul class="dropdowns">
+											<!--<ul class="dropdowns">
 												<li class="has_children">
 													<div class="dropdown_item">
 														<div class="dropdown_item_title"><span>Lecture 1:</span> Lorem Ipsn gravida nibh vel velit auctor aliquet.</div>
@@ -357,11 +401,11 @@
 											</ul>
 										</div>
 									</div>
-								</div>
+								</div>-->
 
 								<!-- Reviews -->
 								<div class="tab_panel tab_panel_3">
-									<div class="tab_panel_title">Course Review</div>
+									<div class="tab_panel_title">Internship Review</div>
 
 									<!-- Rating -->
 									<div class="review_rating_container">
@@ -391,12 +435,13 @@
 													<div class="comment_image"><div><img src="images/comment_1.jpg" alt=""></div></div>
 													<div class="comment_content">
 														<div class="comment_title_container d-flex flex-row align-items-center justify-content-start">
-															<div class="comment_author"><a href="#">Milley Cyrus</a></div>
+															<div class="comment_author"><a href="#">Darena Ivanova</a></div>
 															<div class="comment_rating"><div class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i></div></div>
 															<div class="comment_time ml-auto">1 day ago</div>
 														</div>
 														<div class="comment_text">
-															<p>There are many variations of passages of Lorem Ipsum available, but the majority have alteration in some form, by injected humour.</p>
+															<p>I learned more than I ever expected.  I felt in the beginning that I would really have a head start being that I am a senior and have taken all my classes already but I realized that I don’t think any amount of classes will ever prepare you for all the world has to offer.  Don’t get me wrong, 
+															I feel that Auburn did a wonderful job teaching me but I feel that it is most valuable if combined with first hand work . </p>
 														</div>
 														<div class="comment_extras d-flex flex-row align-items-center justify-content-start">
 															<div class="comment_extra comment_likes"><a href="#"><i class="fa fa-heart" aria-hidden="true"></i><span>15</span></a></div>
@@ -410,12 +455,13 @@
 															<div class="comment_image"><div><img src="images/comment_2.jpg" alt=""></div></div>
 															<div class="comment_content">
 																<div class="comment_title_container d-flex flex-row align-items-center justify-content-start">
-																	<div class="comment_author"><a href="#">John Tyler</a></div>
+																	<div class="comment_author"><a href="#">Marin Sivov</a></div>
 																	<div class="comment_rating"><div class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i></div></div>
 																	<div class="comment_time ml-auto">1 day ago</div>
 																</div>
 																<div class="comment_text">
-																	<p>There are many variations of passages of Lorem Ipsum available, but the majority have alteration in some form, by injected humour.</p>
+																	<p>It would be beneficial to encourage students to find their internship based on their future career goals. 
+																	It's not always necessary to stick to what's listed or given to us to find the perfect internship.</p>
 																</div>
 																<div class="comment_extras d-flex flex-row align-items-center justify-content-start">
 																	<div class="comment_extra comment_likes"><a href="#"><i class="fa fa-heart" aria-hidden="true"></i><span>15</span></a></div>
@@ -431,12 +477,12 @@
 													<div class="comment_image"><div><img src="images/comment_3.jpg" alt=""></div></div>
 													<div class="comment_content">
 														<div class="comment_title_container d-flex flex-row align-items-center justify-content-start">
-															<div class="comment_author"><a href="#">Milley Cyrus</a></div>
+															<div class="comment_author"><a href="#">Dimitar Vulkov</a></div>
 															<div class="comment_rating"><div class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i></div></div>
 															<div class="comment_time ml-auto">1 day ago</div>
 														</div>
 														<div class="comment_text">
-															<p>There are many variations of passages of Lorem Ipsum available, but the majority have alteration in some form, by injected humour.</p>
+															<p>I had to be responsible for people’s money, credit card authorization forms, getting to work on time, fulfilling my word and completing all of the tasks that I was assigned. I learned focus. </p>
 														</div>
 														<div class="comment_extras d-flex flex-row align-items-center justify-content-start">
 															<div class="comment_extra comment_likes"><a href="#"><i class="fa fa-heart" aria-hidden="true"></i><span>15</span></a></div>
@@ -464,40 +510,40 @@
 
 						<!-- Feature -->
 						<div class="sidebar_section">
-							<div class="sidebar_section_title">Course Feature</div>
+							<div class="sidebar_section_title">Salary</div>
 							<div class="sidebar_feature">
-								<div class="course_price">$180</div>
+								<div class="course_price">$900</div>
 
 								<!-- Features -->
 								<div class="feature_list">
 
 									<!-- Feature -->
 									<div class="feature d-flex flex-row align-items-center justify-content-start">
-										<div class="feature_title"><i class="fa fa-clock-o" aria-hidden="true"></i><span>Duration:</span></div>
-										<div class="feature_text ml-auto">2 weeks</div>
+										<div class="feature_title"><i class="fa fa-clock-o" aria-hidden="true"></i><span>Updated</span></div>
+										<div class="feature_text ml-auto">03/01/2019</div>
 									</div>
 
 									<!-- Feature -->
 									<div class="feature d-flex flex-row align-items-center justify-content-start">
-										<div class="feature_title"><i class="fa fa-file-text-o" aria-hidden="true"></i><span>Lectures:</span></div>
-										<div class="feature_text ml-auto">10</div>
-									</div>
-
-									<!-- Feature -->
-									<div class="feature d-flex flex-row align-items-center justify-content-start">
-										<div class="feature_title"><i class="fa fa-question-circle-o" aria-hidden="true"></i><span>Lectures:</span></div>
-										<div class="feature_text ml-auto">6</div>
-									</div>
-
-									<!-- Feature -->
-									<div class="feature d-flex flex-row align-items-center justify-content-start">
-										<div class="feature_title"><i class="fa fa-list-alt" aria-hidden="true"></i><span>Lectures:</span></div>
+										<div class="feature_title"><i class="fa fa-file-text-o" aria-hidden="true"></i><span>Motivation Letter needed?</span></div>
 										<div class="feature_text ml-auto">Yes</div>
 									</div>
 
 									<!-- Feature -->
 									<div class="feature d-flex flex-row align-items-center justify-content-start">
-										<div class="feature_title"><i class="fa fa-users" aria-hidden="true"></i><span>Lectures:</span></div>
+										<div class="feature_title"><i class="fa fa-question-circle-o" aria-hidden="true"></i><span>Interview</span></div>
+										<div class="feature_text ml-auto">Yes</div>
+									</div>
+
+									<!-- Feature -->
+									<div class="feature d-flex flex-row align-items-center justify-content-start">
+										<div class="feature_title"><i class="fa fa-list-alt" aria-hidden="true"></i><span>Paid Intern</span></div>
+										<div class="feature_text ml-auto">Yes</div>
+									</div>
+
+									<!-- Feature -->
+									<div class="feature d-flex flex-row align-items-center justify-content-start">
+										<div class="feature_title"><i class="fa fa-users" aria-hidden="true"></i><span>Interns</span></div>
 										<div class="feature_text ml-auto">35</div>
 									</div>
 
@@ -507,13 +553,13 @@
 
 						<!-- Feature -->
 						<div class="sidebar_section">
-							<div class="sidebar_section_title">Teacher</div>
+							<div class="sidebar_section_title">Mentor</div>
 							<div class="sidebar_teacher">
 								<div class="teacher_title_container d-flex flex-row align-items-center justify-content-start">
 									<div class="teacher_image"><img src="images/teacher.jpg" alt=""></div>
 									<div class="teacher_title">
 										<div class="teacher_name"><a href="#">Jacke Masito</a></div>
-										<div class="teacher_position">Marketing & Management</div>
+										<div class="teacher_position">IT & Software</div>
 									</div>
 								</div>
 								<div class="teacher_meta_container">
@@ -534,7 +580,8 @@
 									</div>
 								</div>
 								<div class="teacher_info">
-									<p>Hi! I am Masion, I’m a marketing & management  eros pulvinar velit laoreet, sit amet egestas erat dignissim. Sed quis rutrum tellus, sit amet viverra felis. Cras sagittis sem sit amet urna feugiat rutrum nam nulla ipsum.</p>
+									<p>Hi! I am Masion. I remember when I started in a new technology field myself. I already was well established in my career, but I started attending an annual industry 
+									conference in a field that was new to me. I was lucky to meet someone who was knowledgeable and respected.  </p>
 								</div>
 							</div>
 						</div>
@@ -583,7 +630,7 @@
 	<!-- Newsletter -->
 
 	<div class="newsletter">
-		<div class="newsletter_background" style="background-image:url(images/newsletter_background.jpg)"></div>
+		<div class="newsletter_background parallax-window" data-parallax="scroll" data-image-src="images/newsletter.jpg" data-speed="0.8"></div>
 		<div class="container">
 			<div class="row">
 				<div class="col">
@@ -592,7 +639,7 @@
 						<!-- Newsletter Content -->
 						<div class="newsletter_content text-lg-left text-center">
 							<div class="newsletter_title">sign up for news and offers</div>
-							<div class="newsletter_subtitle">Subcribe to lastest smartphones news & great deals we offer</div>
+							<div class="newsletter_subtitle">Subcribe to lastest news & internship programs</div>
 						</div>
 
 						<!-- Newsletter Form -->
@@ -625,11 +672,11 @@
 								<div class="footer_section footer_about">
 									<div class="footer_logo_container">
 										<a href="#">
-											<div class="footer_logo_text">Unic<span>at</span></div>
+											<div class="footer_logo_text">Be<span>Intern</span></div>
 										</a>
 									</div>
 									<div class="footer_about_text">
-										<p>Lorem ipsum dolor sit ametium, consectetur adipiscing elit.</p>
+										<p>“The future belongs to those who believe in the beauty of their dreams.” —Eleanor Roosevelt</p>
 									</div>
 									<div class="footer_social">
 										<ul>
@@ -650,9 +697,9 @@
 									<div class="footer_title">Contact Us</div>
 									<div class="footer_contact_info">
 										<ul>
-											<li>Email: Info.deercreative@gmail.com</li>
+											<li>Email: beintern@gmail.com</li>
 											<li>Phone:  +(88) 111 555 666</li>
-											<li>40 Baria Sreet 133/2 New York City, United States</li>
+											<li>40 Baria Sreet 133/2 Varna City, Bulgaria</li>
 										</ul>
 									</div>
 								</div>
@@ -663,14 +710,14 @@
 					
 								<!-- Footer links -->
 								<div class="footer_section footer_links">
-									<div class="footer_title">Contact Us</div>
+									<div class="footer_title">More</div>
 									<div class="footer_links_container">
 										<ul>
-											<li><a href="index.html">Home</a></li>
-											<li><a href="about.html">About</a></li>
-											<li><a href="contact.html">Contact</a></li>
+											<li><a href="index.php">Home</a></li>
+											<li><a href="our_mission.php">Our Mission</a></li>
+											<li><a href="contact.php">Contacts</a></li>
 											<li><a href="#">Features</a></li>
-											<li><a href="courses.html">Courses</a></li>
+											<li><a href="internships.php">Internships</a></li>
 											<li><a href="#">Events</a></li>
 											<li><a href="#">Gallery</a></li>
 											<li><a href="#">FAQs</a></li>
@@ -702,7 +749,7 @@
 				<div class="col">
 					<div class="copyright d-flex flex-lg-row flex-column align-items-center justify-content-start">
 						<div class="cr_text"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Donika Ilieva</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>
 						<div class="ml-lg-auto cr_links">
 							<ul class="cr_list">
@@ -716,6 +763,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			</div>
 		</div>
 	</footer>
+</div>
 </div>
 
 <script src="js/jquery-3.2.1.min.js"></script>

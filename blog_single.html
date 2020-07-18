@@ -1,7 +1,11 @@
+<?php
+session_start();
+include 'config.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Blog Single</title>
+<title>BeIntern - Blog Example</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Unicat project">
@@ -9,6 +13,7 @@
 <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
 <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link href="plugins/colorbox/colorbox.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="images/beintern_final_logo.png"> 
 <link rel="stylesheet" type="text/css" href="styles/blog_single.css">
 <link rel="stylesheet" type="text/css" href="styles/blog_single_responsive.css">
 </head>
@@ -29,17 +34,26 @@
 							<div class="top_bar_content d-flex flex-row align-items-center justify-content-start">
 								<ul class="top_bar_contact_list">
 									<li><div class="question">Have any questions?</div></li>
-									<li>
 										<i class="fa fa-phone" aria-hidden="true"></i>
-										<div>001-1234-88888</div>
+									<li>
+										<div>+359 87 711 6695</div>
 									</li>
 									<li>
 										<i class="fa fa-envelope-o" aria-hidden="true"></i>
-										<div>info.deercreative@gmail.com</div>
+										<div>beintern@gmail.com</div>
 									</li>
 								</ul>
 								<div class="top_bar_login ml-auto">
-									<div class="login_button"><a href="#">Register or Login</a></div>
+								<div class="dropdown">
+									  <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										Register or Login
+									  </button>
+									  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+										<a class="dropdown-item" href="login_student.php">Student</a>
+										<a class="dropdown-item" href="login_employer.php">Employer</a>
+										<a class="dropdown-item" href="login_educator.php">Educator</a>
+									  </div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -56,23 +70,34 @@
 						<div class="header_content d-flex flex-row align-items-center justify-content-start">
 							<div class="logo_container">
 								<a href="#">
-									<div class="logo_text">Unic<span>at</span></div>
+							
+									<div class="logo_text">Be<span>Intern</span></div>
+									<img src="images/beintern_final_logo.png" alt="logo" width="90" height="85";
 								</a>
+									
 							</div>
 							<nav class="main_nav_contaner ml-auto">
 								<ul class="main_nav">
-									<li><a href="index.html">Home</a></li>
-									<li><a href="about.html">About</a></li>
-									<li><a href="courses.html">Courses</a></li>
-									<li><a href="blog.html">Blog</a></li>
-									<li><a href="#">Page</a></li>
-									<li><a href="contact.html">Contact</a></li>
+									<li><a href="index.php">Home</a></li>
+									<li><a href="our_mission.php">Our mission</a></li>
+									<li><a href="internships.php">Internships</a></li>
+									<li><a href="<?php
+									if($_SESSION['profile_type'] == 1){
+										echo "profile_panels/student_profile_panel/index_student.php";
+										}else if ($_SESSION['profile_type'] == 2){
+										echo "profile_panels/employer_profile_panel/index_employer.php";
+									}else if ($_SESSION['profile_type'] == 3){
+										echo "profile_panels/educator_profile_panel/index_educator.php";
+									}else{
+										echo "#";
+									}
+									?>">My Profile</a></li>
+									<li class="active"><a href="blog.php">Blog</a></li>
+									<li><a href="contact.php">Contacts</a></li>
 								</ul>
 								<div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>
 
 								<!-- Hamburger -->
-
-								<div class="shopping_cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div>
 								<div class="hamburger menu_mm">
 									<i class="fa fa-bars menu_mm" aria-hidden="true"></i>
 								</div>
@@ -117,12 +142,12 @@
 		</div>
 		<nav class="menu_nav">
 			<ul class="menu_mm">
-				<li class="menu_mm"><a href="index.html">Home</a></li>
-				<li class="menu_mm"><a href="#">About</a></li>
-				<li class="menu_mm"><a href="#">Courses</a></li>
-				<li class="menu_mm"><a href="#">Blog</a></li>
-				<li class="menu_mm"><a href="#">Page</a></li>
-				<li class="menu_mm"><a href="contact.html">Contact</a></li>
+				<li class="menu_mm"><a href="index.php">Home</a></li>
+				<li class="menu_mm"><a href="our_mission.php">Our mission</a></li>
+				<li class="menu_mm"><a href="internships.php">Internships</a></li>
+				<li class="menu_mm"><a href="#">My Profile</a></li>
+				<li class="menu_mm"><a href="blog.php">Blog</a></li>
+				<li class="menu_mm"><a href="contact.php">Contacts</a></li>
 			</ul>
 		</nav>
 	</div>
@@ -138,7 +163,7 @@
 							<ul>
 								<li><a href="index.html">Home</a></li>
 								<li><a href="blog.html">Blog</a></li>
-								<li>Blog Single</li>
+								<li>Blog title</li>
 							</ul>
 						</div>
 					</div>
@@ -311,7 +336,8 @@
 									<li><a href="#" class="clearfix">Business<span>(10)</span></a></li>
 									<li><a href="#" class="clearfix">IT & Software<span>(22)</span></a></li>
 									<li><a href="#" class="clearfix">Languages<span>(12)</span></a></li>
-									<li><a href="#" class="clearfix">Programming<span>(18)</span></a></li>
+									<li><a href="#" class="clearfix">Marketing<span>(18)</span></a></li>
+									<li><a href="#" class="clearfix">Biology<span>(18)</span></a></li>
 								</ul>
 							</div>
 						</div>
@@ -432,7 +458,7 @@
 	<!-- Newsletter -->
 
 	<div class="newsletter">
-		<div class="newsletter_background" style="background-image:url(images/newsletter_background.jpg)"></div>
+		<div class="newsletter_background parallax-window" data-parallax="scroll" data-image-src="images/newsletter.jpg" data-speed="0.8"></div>
 		<div class="container">
 			<div class="row">
 				<div class="col">
@@ -441,7 +467,7 @@
 						<!-- Newsletter Content -->
 						<div class="newsletter_content text-lg-left text-center">
 							<div class="newsletter_title">sign up for news and offers</div>
-							<div class="newsletter_subtitle">Subcribe to lastest smartphones news & great deals we offer</div>
+							<div class="newsletter_subtitle">Subcribe to lastest news & internship programs</div>
 						</div>
 
 						<!-- Newsletter Form -->
@@ -474,11 +500,11 @@
 								<div class="footer_section footer_about">
 									<div class="footer_logo_container">
 										<a href="#">
-											<div class="footer_logo_text">Unic<span>at</span></div>
+											<div class="footer_logo_text">Be<span>Intern</span></div>
 										</a>
 									</div>
 									<div class="footer_about_text">
-										<p>Lorem ipsum dolor sit ametium, consectetur adipiscing elit.</p>
+										<p>“The future belongs to those who believe in the beauty of their dreams.” —Eleanor Roosevelt</p>
 									</div>
 									<div class="footer_social">
 										<ul>
@@ -499,9 +525,9 @@
 									<div class="footer_title">Contact Us</div>
 									<div class="footer_contact_info">
 										<ul>
-											<li>Email: Info.deercreative@gmail.com</li>
+											<li>Email: beintern@gmail.com</li>
 											<li>Phone:  +(88) 111 555 666</li>
-											<li>40 Baria Sreet 133/2 New York City, United States</li>
+											<li>40 Baria Sreet 133/2 Varna City, Bulgaria</li>
 										</ul>
 									</div>
 								</div>
@@ -512,14 +538,14 @@
 					
 								<!-- Footer links -->
 								<div class="footer_section footer_links">
-									<div class="footer_title">Contact Us</div>
+									<div class="footer_title">More</div>
 									<div class="footer_links_container">
 										<ul>
-											<li><a href="index.html">Home</a></li>
-											<li><a href="about.html">About</a></li>
-											<li><a href="contact.html">Contact</a></li>
+											<li><a href="index.php">Home</a></li>
+											<li><a href="our_mission.php">Our Mission</a></li>
+											<li><a href="contact.php">Contacts</a></li>
 											<li><a href="#">Features</a></li>
-											<li><a href="courses.html">Courses</a></li>
+											<li><a href="internships.php">Internships</a></li>
 											<li><a href="#">Events</a></li>
 											<li><a href="#">Gallery</a></li>
 											<li><a href="#">FAQs</a></li>
@@ -551,7 +577,7 @@
 				<div class="col">
 					<div class="copyright d-flex flex-lg-row flex-column align-items-center justify-content-start">
 						<div class="cr_text"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Donika Ilieva</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>
 						<div class="ml-lg-auto cr_links">
 							<ul class="cr_list">
@@ -565,6 +591,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			</div>
 		</div>
 	</footer>
+</div>
 </div>
 
 <script src="js/jquery-3.2.1.min.js"></script>
